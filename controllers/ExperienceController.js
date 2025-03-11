@@ -48,8 +48,6 @@ async function updateExperience(req, res) {
         const { id, designation, company, description, start, end } = req.body;  // Extract id, title, and description
 
         if (!id) res.send('ID is required')
-
-
         const filter = { _id: new ObjectId(id) };
         updateData = {
             $set: {
