@@ -2,6 +2,7 @@ const express = require('express');
 const { postSkill, getData, deleteSkills, updateskills } = require('../controllers/SkillsController');
 const { postExperience, getExperience, deleteExperience, updateExperience } = require('../controllers/ExperienceController');
 const { getProfile, updatprofile } = require('../controllers/ProfileController');
+const { createBlogs, getBlogs, deleteBlogs, updateBlog } = require('../controllers/BlogsController')
 
 
 const router = express.Router();
@@ -21,6 +22,12 @@ router.post('/experience', postExperience);
 router.get('/experience', getExperience)
 router.delete('/experience', deleteExperience)
 router.put('/experience', updateExperience)
+
+//========
+router.post('/blogs', createBlogs)
+router.get('/blogs', getBlogs)
+router.delete('/blogs', deleteBlogs)
+router.put('/blogs', updateBlog)
 
 //module
 module.exports = router;
