@@ -24,6 +24,5 @@ async function connectDB() {
         console.error("❌ MongoDB Connection Error:", err);
     }
 }
-
 // ✅ Correctly export only `connectDB`
 module.exports = { connectDB, client };
