@@ -16,7 +16,6 @@ async function postExperience(req, res) {
         res.status(500).send({ error: err.message });
     }
 }
-
 // Get all data from the collection
 async function getExperience(req, res) {
     try {
@@ -26,7 +25,6 @@ async function getExperience(req, res) {
         res.status(500).send({ message: err.message });
     }
 }
-
 //delete one of skills
 async function deleteExperience(req, res) {
     const { id } = req.body
