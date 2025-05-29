@@ -1,5 +1,5 @@
-const { ObjectId } = require('mongodb');
 const { client } = require('../Config/Db');
+const { ObjectId } = require('mongodb');
 
 //=================================
 const myDB = client.db('mar');
@@ -7,9 +7,9 @@ const myColl = myDB.collection("Skills");
 
 // Post data on the database
 async function postSkill(req, res) {
-    const { title, description, url } = req.body;
+    const { title, description, url, cetagory } = req.body;
     try {
-        const skills = { title, description, url };
+        const skills = { title, description, url, cetagory };
         const result = await myColl.insertOne(skills);
         res.status(201).send({ message: 'Skill added successfully', data: result });
     } catch (err) {
@@ -46,33 +46,26 @@ async function deleteSkills(req, res) {
 }
 
 //Update
+
 async function updateskills(req, res) {
     try {
-        const { id, title, description, url } = req.body;  // Extract id, title, and description
+        const id = req.params.id;
+        const { title, description, url, cetagory } = req.body;
 
-        if (!id) res.send('ID is required')
+        if (!id) return res.status(400).send({ message: 'ID is required' });
 
+        const updateFields = {};
+        if (title) updateFields.title = title;
+        if (description) updateFields.description = description;
+        if (url) updateFields.url = url;
+        if (cetagory) updateFields.cetagory = cetagory;
 
-        const filter = { _id: new ObjectId(id) };
-        // let upDatedata;
-        // if (title || !description || !url) {
-        //     upDatedata = { $set: { title } }
-        // }
-        // if (description || !title) {
-        //     upDatedata = {
-        //         $set: {
-        //             description
-        //         }
-        //     }
-        // }
-        const updateData = {
-            $set: {
-                title, description, url
-            }
+        if (Object.keys(updateFields).length === 0) {
+            return res.status(400).send({ message: 'No fields provided for update' });
         }
 
-
-
+        const filter = { _id:new ObjectId(id) };
+        const updateData = { $set: updateFields };
 
         const result = await myColl.updateOne(filter, updateData);
 
@@ -85,6 +78,5 @@ async function updateskills(req, res) {
         res.status(400).send({ message: 'Error updating skill', error: err.message });
     }
 }
-
 
 module.exports = { postSkill, getData, deleteSkills, updateskills };

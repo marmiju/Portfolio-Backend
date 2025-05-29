@@ -16,7 +16,7 @@ router.put('/profile', updatprofile)
 router.post('/skills', postSkill);
 router.get('/skills', getData)
 router.delete('/skills', deleteSkills)
-router.put('/skills', updateskills)
+router.put('/skills/:id', updateskills)
 
 //Experience
 router.post('/experience', postExperience);

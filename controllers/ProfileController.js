@@ -18,7 +18,7 @@ async function getProfile(req, res) {
 }
 
 async function updatprofile(req, res) {
-    const { url, name, designation, description, bio, resume, quats } = req.body
+    const { url, name, designation, description, bio, resume, quats, social } = req.body
     try {
 
         if (!id) {
@@ -27,12 +27,12 @@ async function updatprofile(req, res) {
         const filter = { _id: new ObjectId(id) }
         const data = {
             $set: {
-                url, name, designation, description, bio, resume, quats
+                url, name, designation, description, bio, resume, quats, social
             }
         }
         result = await coll.updateOne(filter, data)
         if (result.modifiedCount === 0) {
-            return res.status(404).send({ message: 'Profile Not Found' });
+            return res.status(404).send({ message: 'Oops! Something Went Wrong' });
         }
         res.status(200).send({ message: "Succesfully Updated Data", result });
 
