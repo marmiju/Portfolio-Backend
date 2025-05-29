@@ -36,6 +36,9 @@ router.post('/portfolio', createportfolio)
 router.get('/portfolio', getAllPortfolio)
 router.get('/portfolio/:id', getPortfolio);
 router.delete('/portfolio/', deletePortfolio);
+router.get('/', (req, res) => {
+    res.send('server is running')
+})
 
 //module
 module.exports = router;
