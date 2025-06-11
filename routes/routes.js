@@ -61,7 +61,7 @@ router.delete("/experience", deleteExperience);
 router.put("/experience", updateExperience);
 
 //========
-router.post("/blogs", createBlogs);
+router.post("/addblog", upload.single("cover"), createBlogs);
 router.get("/blogs", getBlogs);
 router.delete("/blogs", deleteBlogs);
 router.post("/blog/update", upload.single("cover"), updateBlog);
